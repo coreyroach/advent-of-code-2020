@@ -9,7 +9,6 @@ const p0 = performance.now();
 
 const commands = lines.map(line => line.split(' '));
 
-loop:
 for (let i = 0; i < commands.length; i++) {
   let temp = commands.map((x) => x.map((y) => y));
   
@@ -37,7 +36,7 @@ for (let i = 0; i < commands.length; i++) {
   if (pos === temp.length) {
     console.log('Accumulator when program terminates: ', acc);
     console.log(pos, temp.length, temp[i], i);
-    break loop;
+    break;
   }
 }
 
