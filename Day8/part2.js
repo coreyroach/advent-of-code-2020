@@ -9,19 +9,18 @@ const instructions = lines.map(line => line.split(' '));
 
 function run() {
   for (let i = 0; i < instructions.length; i++) {
-    let temp = instructions.map((x) => x.map((y) => y));
+    let tmp = instructions.map(a => [...a]);
+    let pos = 0, acc = 0, executed = {};
     
-    if (instructions[i][0] == 'nop') {
-      temp[i][0] = 'jmp';
-    } else if (instructions[i][0] == 'jmp') {
-      temp[i][0] = 'nop';
+    if (instructions[i][0] === 'nop') {
+      tmp[i][0] = 'jmp';
+    } else if (instructions[i][0] === 'jmp') {
+      tmp[i][0] = 'nop';
     }
   
-    let pos = 0, acc = 0, executed = {};
-  
-    while (temp[pos] && !executed[pos]) {
+    while (tmp[pos] && !executed[pos]) {
       executed[pos] = true;
-      let [cmd, amt] = temp[pos];
+      let [cmd, amt] = tmp[pos];
       if (cmd === 'acc') {
         acc += Number(amt);
       } else if (cmd === 'jmp') {
@@ -30,10 +29,7 @@ function run() {
       pos += 1;
     }
     
-    if (pos === temp.length) {
-      // console.log(pos, temp.length, temp[i], i);
-      return acc;
-    }
+    if (pos === tmp.length) return acc;
   }
 }
 
